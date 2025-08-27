@@ -2,9 +2,11 @@
 //                                      Control Avanzado I
 //                                          Cursada 2025
 //---------------------------------------------------------------------------------------------------
+/*                         Trabajo Práctico N°1: Estudio de una planta
+-----------------------------------------------------------------------------------------------------
 
-/*Programa utilizado para evaluar la temperatura de una pava, mediante el módulos max6675, una Esp8266 
-y una termocupla*/
+  * Programa utilizado para evaluar la temperatura de una pava, mediante el módulos max6675, una 
+  Esp8266 y una termocupla*/
 //---------------------------------------------------------------------------------------------------
 
 #include <Arduino.h>   // Librería base de Arduino (setup, loop, millis, etc.)
