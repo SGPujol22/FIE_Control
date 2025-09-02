@@ -1,0 +1,46 @@
+% coseno de 15Hz
+% y(t) = cos(2*pi*f*t)
+% y(t) = cos(2*pi*15*t)
+
+f = 15 ;
+Ts = 1/f/40;
+syms t ;
+y = cos(2*pi*f*t)
+
+Y = laplace(y)
+
+% s/(900*pi^2 + s^2)
+
+num = [1 0];
+den = [1 0 900*pi^2];
+YTF = tf(num,den)
+
+% hasta acá el plano del tiempo continuo
+% y el plano de la frecuencia
+% ahora pasamos al plano DISCRETO
+
+[NUMd,DENd] = c2dm(num,den,Ts,'zoh');
+
+YZ = filt(NUMd,DENd,Ts)
+disp("Entrada anterior")
+s=num2str(NUMd(2),20)
+disp("Entrada ante anterior")
+s=num2str(NUMd(3),20)
+disp("salida anterior")
+s=num2str(DENd(2),20)
+disp("salida ante anterior")
+s=num2str(DENd(3),20)
+
+step(YTF,0.066)
+hold on
+step(YZ,0.066)
+
+% aca se pueden copiar los valores del dsPIC y compara en la misma gráfica
+
+% como los valores son más grandes que 1, dividimos numerador y denominador
+% por 2
+
+NUMd2 = NUMd/2
+DENd2 = DENd/2
+
+fprintf("{Q15(%s), Q15(%s), Q15(%s), Q15(%s), Q15(%s)}",num2str(NUMd2(1),25),num2str(NUMd2(2),25),num2str(NUMd2(3),25),num2str(-DENd2(2),25),num2str(-DENd2(3),25))
